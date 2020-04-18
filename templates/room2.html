@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Room 2</title>
+        <style>
+        img {
+            width: 50%;
+        }
+        .row {
+            display: flex;
+        }
+
+        .column {
+            flex: 50%;
+        }
+        </style>
+    </head>
+    <body>
+        <h1 style="color:green">Green Room</h1>
+        <p>You are in a green room. There is a lockbox in the center of the room with the label "<a href="https://en.wikipedia.org/wiki/CMYK_color_model">CMYK</a>".</p>
+        <form action="/room2/lockbox">
+            <label for="lockbox">Lockbox Key:</label>
+            <input type="text" id="lockbox" name="key"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% if lockbox_failed %}
+        <p style="color:red">Unfortunately, that was incorrect.</p>
+        {% endif %}
+
+        <br/>
+
+        <div class="row">
+            <div class="column">
+                <p>There are two ways to represent color: Additive and Subtractive.</p>
+                <p>With Subtractive Color, we start with the full color of White, then subtract colors to generate any color we want. If we subtract everything, we get Black as the absence of color.</p>
+                <p>The following diagram illustrates Subtractive Color:</p>
+                <img src="static/subtractive_color.png" alt="Subtractive Color" style="img"/>
+                <p>Highlight the room to find the key.</p>
+            </div>
+            <div class="column">
+            </div>
+        </div>
+
+        <a href="/room7">Return to White Room</a>
+
+        <p style="color:white">16</p>
+    </body>
+</html>

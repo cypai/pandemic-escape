@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{ room_title }}</title>
+    </head>
+    <body>
+        <h1 style="{{ color }}">{{ room_header }}</h1>
+        <p>This room is locked. Please provide the key.</p>
+        <form action="/locked_room">
+            <label for="key">Key:</label>
+            <input type="text" id="key" name="key"/>
+            <input type="hidden" id="locked_room" name="locked_room" value="{{ room }}"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% if unlock_failure %}
+        <p style="color:red">Unfortunately, that was incorrect.</p>
+        {% endif %}
+
+        <a href="/room7">Return to White Room</a>
+    </body>
+</html>

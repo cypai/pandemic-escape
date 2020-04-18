@@ -43,6 +43,30 @@ async def room7(request: Request):
     return templates.TemplateResponse("room7.html", {"request": request})
 
 
+def answer_template(request: Request, title, header, color, message1, message2):
+    return templates.TemplateResponse("answer.html",
+            {
+                "request": request,
+                "room_title": title,
+                "room_header": header,
+                "color": color,
+                "message1": message1,
+                "message2": message2,
+            })
+
+
+def locked_room_template(request: Request, title, header, color, room, unlock_failure):
+    return templates.TemplateResponse("locked_room.html",
+            {
+                "request": request,
+                "room_title": title,
+                "room_header": header,
+                "color": color,
+                "room": room,
+                "unlock_failure": unlock_failure,
+            })
+
+
 @app.get("/room1")
 async def room1(request: Request, lockbox_failed: bool = False):
     return templates.TemplateResponse("room1.html", {"request": request, "lockbox_failed": lockbox_failed})
@@ -66,13 +90,43 @@ async def room1_answer(request: Request):
             'A second note has the message: "The keys to locked rooms are in RGB format."')
 
 
-def answer_template(request: Request, title, header, color, message1, message2):
-    return templates.TemplateResponse("answer.html",
-            {
-                "request": request,
-                "room_title": title,
-                "room_header": header,
-                "color": color,
-                "message1": message1,
-                "message2": message2,
-            })
+@app.get("/room2")
+async def room2(request: Request, lockbox_failed: bool = False):
+    return templates.TemplateResponse("room2.html", {"request": request, "lockbox_failed": lockbox_failed})
+
+
+@app.get("/room2/lockbox")
+async def room2_lockbox(request: Request, key: str):
+    if key == "59487500":
+        return RedirectResponse(url="/room2/answer59487500")
+    else:
+        return RedirectResponse(url="/room2?lockbox_failed=true")
+
+
+@app.get("/room2/answer59487500")
+async def room2_answer(request: Request):
+    return answer_template(request,
+            "Room 2",
+            "Green Room",
+            "color:green",
+            'There is a note with the message: "G: 1"',
+            'A second note has the message: "The White Room has doors with the same colors..."')
+
+
+@app.get("/room4")
+async def room4(request: Request, unlock_failure: bool = False):
+    return locked_room_template(request,
+            "Room 4",
+            "Cyan Room",
+            "color:cyan",
+            4,
+            unlock_failure)
+
+
+@app.get("/locked_room")
+async def locked_room_verifier(key: str, locked_room: str):
+    if locked_room == "4":
+        if key == "019":
+            return RedirectResponse(url="/room4/019")
+        else:
+            return RedirectResponse(url="/room4?unlock_failure=true")
