@@ -34,3 +34,8 @@ async def unregister():
     response.delete_cookie(key="name")
     response.delete_cookie(key="team")
     return response
+
+
+@app.get("/room7")
+async def room7(request: Request):
+    return templates.TemplateResponse("room7.html", {"request": request})
