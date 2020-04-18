@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Pandemic Escape</title>
+    </head>
+    <body>
+        <h1>Welcome to the Pandemic Escape Room!</h1>
+        <p>You have been infected with a novel strain of the coronavirus by a mad scientist! The vaccine is in here somewhere...</p>
+        {% if data.registered %}
+        <p>Your name: {{ data.name }}</p>
+        <p>Your team number: {{ data.team }}</p>
+        <form action="/unregister">
+            <input type="submit" value="Unregister"/>
+        </form>
+        {% else %}
+        <p>Please register your name and team number here.</p>
+        <form action="/register">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"/><br/>
+            <label for="team">Team Number:</label>
+            <input type="text" id="team" name="team"/><br/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% endif %}
+    </body>
+</html>
