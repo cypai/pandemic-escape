@@ -2,6 +2,14 @@
 <html lang="en">
     <head>
         <title>Room 4</title>
+        <style>
+        .row {
+            display: flex;
+        }
+        .column {
+            flex: 10%;
+        }
+        </style>
     </head>
     <body>
         <h1 style="color:cyan">Cyan Room</h1>
@@ -17,13 +25,38 @@
 
         <br/>
 
+        <p>A note is on the desk with the words: "Reminder to self: An assistant from a parallel universe is required."</p>
+        {% if show_start %}
+        <form action="/room4">
+            <input type="hidden" id="start_btn_clicked" name="start_btn_clicked" value="true"/>
+            <input type="submit" value="Start"/>
+        </form>
+        {% endif %}
+        {% if message %}
+        <p style="{{ message_color }}">{{ message }}</p>
+        {% endif %}
+        <br/>
+
         <div class="row">
             <div class="column">
-                <p>A note is on the desk with the words: "Reminder to self: An assistant from a parallel universe is required."</p>
+                {% for char in chars %}
+                <div class="row">
+                    {% for number in range(1, 11) %}
+                    <div class="column">
+                        <form action="/room4">
+                            <input type="hidden" id="coordinates" name="coordinates" value="{{ char }}{{ number }}"/>
+                            <input type="submit" value="x"/>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
             </div>
             <div class="column">
             </div>
         </div>
+
+        <br/>
 
         <a href="/room7">Return to White Room</a>
     </body>
