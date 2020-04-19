@@ -7,7 +7,7 @@ from starlette.templating import Jinja2Templates
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-sessions = TTLCache(100, 3600)
+team_progress = TTLCache(100, 3600)
 
 templates = Jinja2Templates(directory="templates")
 
@@ -114,19 +114,32 @@ async def room2_answer(request: Request):
 
 
 @app.get("/room4")
-async def room4(request: Request, unlock_failure: bool = False):
-    return locked_room_template(request,
-            "Room 4",
-            "Cyan Room",
-            "color:cyan",
-            4,
-            unlock_failure)
+async def room4(
+        request: Request,
+        unlock_failure: bool = False,
+        lockbox_failed: bool = False,
+        team: int = Cookie(None)):
+
+    if (team, 4) in team_progress:
+        return templates.TemplateResponse("room4.html",
+                {
+                    "request": request,
+                    "lockbox_failed": lockbox_failed,
+                })
+    else:
+        return locked_room_template(request,
+                "Room 4",
+                "Cyan Room",
+                "color:cyan",
+                4,
+                unlock_failure)
 
 
 @app.get("/locked_room")
-async def locked_room_verifier(key: str, locked_room: str):
-    if locked_room == "4":
+async def locked_room_verifier(key: str, locked_room: int, team: int = Cookie(None)):
+    if locked_room == 4:
         if key == "019":
-            return RedirectResponse(url="/room4/019")
+            team_progress[(team, locked_room)] = True
+            return RedirectResponse(url="/room4")
         else:
             return RedirectResponse(url="/room4?unlock_failure=true")

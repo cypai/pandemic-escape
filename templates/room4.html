@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Room 4</title>
+    </head>
+    <body>
+        <h1 style="color:cyan">Cyan Room</h1>
+        <p>You are in a cyan room. There is a lockbox in the center of the room with a 6 digit passcode.</p>
+        <form action="/room4/lockbox">
+            <label for="lockbox">Lockbox Key:</label>
+            <input type="text" id="lockbox" name="key"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% if lockbox_failed %}
+        <p style="color:red">Unfortunately, that was incorrect.</p>
+        {% endif %}
+
+        <br/>
+
+        <div class="row">
+            <div class="column">
+                <p>A note is on the desk with the words: "Reminder to self: You need an assistant!"</p>
+            </div>
+            <div class="column">
+            </div>
+        </div>
+
+        <a href="/room7">Return to White Room</a>
+    </body>
+</html>
