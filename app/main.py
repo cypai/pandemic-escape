@@ -1,5 +1,5 @@
 from cachetools import TTLCache
-from fastapi import Cookie, FastAPI, Form, Request, Response
+from fastapi import Cookie, Depends, FastAPI, Form, Request, Response
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import RedirectResponse
 from starlette.templating import Jinja2Templates
@@ -38,8 +38,31 @@ async def unregister():
     return response
 
 
+class Registry:
+    def __init__(self, name: str, team: int):
+        self.name = name
+        self.team = team
+
+
+class UnregisteredException(Exception):
+    pass
+
+
+async def require_registry(name: str = Cookie(None), team: int = Cookie(None)):
+    if name is None or team is None:
+        raise UnregisteredException()
+    else:
+        registry = Registry(name, team)
+        return registry
+
+
+@app.exception_handler(UnregisteredException)
+async def unregistered_handler(request: Request, ex: UnregisteredException):
+    return RedirectResponse(url="/")
+
+
 @app.get("/room7")
-async def room7(request: Request):
+async def room7(request: Request, registry: Registry = Depends(require_registry)):
     return templates.TemplateResponse("room7.html", {"request": request})
 
 
@@ -68,12 +91,20 @@ def locked_room_template(request: Request, title, header, color, room, unlock_fa
 
 
 @app.get("/room1")
-async def room1(request: Request, lockbox_failed: bool = False):
+async def room1(
+        request: Request,
+        lockbox_failed: bool = False,
+        registry: Registry = Depends(require_registry)):
+
     return templates.TemplateResponse("room1.html", {"request": request, "lockbox_failed": lockbox_failed})
 
 
 @app.get("/room1/lockbox")
-async def room1_lockbox(request: Request, key: str):
+async def room1_lockbox(
+        request: Request,
+        key: str,
+        registry: Registry = Depends(require_registry)):
+
     if key == "13407":
         return RedirectResponse(url="/room1/answer13407")
     else:
@@ -81,7 +112,10 @@ async def room1_lockbox(request: Request, key: str):
 
 
 @app.get("/room1/answer13407")
-async def room1_answer(request: Request):
+async def room1_answer(
+        request: Request,
+        registry: Registry = Depends(require_registry)):
+
     return answer_template(request,
             "Room 1",
             "Red Room",
@@ -91,12 +125,20 @@ async def room1_answer(request: Request):
 
 
 @app.get("/room2")
-async def room2(request: Request, lockbox_failed: bool = False):
+async def room2(
+        request: Request,
+        lockbox_failed: bool = False,
+        registry: Registry = Depends(require_registry)):
+
     return templates.TemplateResponse("room2.html", {"request": request, "lockbox_failed": lockbox_failed})
 
 
 @app.get("/room2/lockbox")
-async def room2_lockbox(request: Request, key: str):
+async def room2_lockbox(
+        request: Request,
+        key: str,
+        registry: Registry = Depends(require_registry)):
+
     if key == "59487500":
         return RedirectResponse(url="/room2/answer59487500")
     else:
@@ -104,7 +146,10 @@ async def room2_lockbox(request: Request, key: str):
 
 
 @app.get("/room2/answer59487500")
-async def room2_answer(request: Request):
+async def room2_answer(
+        request: Request,
+        registry: Registry = Depends(require_registry)):
+
     return answer_template(request,
             "Room 2",
             "Green Room",
@@ -118,9 +163,9 @@ async def room4(
         request: Request,
         unlock_failure: bool = False,
         lockbox_failed: bool = False,
-        team: int = Cookie(None)):
+        registry: Registry = Depends(require_registry)):
 
-    if (team, 4) in team_progress:
+    if (registry.team, 4) in team_progress:
         return templates.TemplateResponse("room4.html",
                 {
                     "request": request,
@@ -136,10 +181,14 @@ async def room4(
 
 
 @app.get("/locked_room")
-async def locked_room_verifier(key: str, locked_room: int, team: int = Cookie(None)):
+async def locked_room_verifier(
+        key: str,
+        locked_room: int,
+        registry: Registry = Depends(require_registry)):
+
     if locked_room == 4:
         if key == "019":
-            team_progress[(team, locked_room)] = True
+            team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room4")
         else:
             return RedirectResponse(url="/room4?unlock_failure=true")
