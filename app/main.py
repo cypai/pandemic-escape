@@ -1,5 +1,6 @@
-import string
+from datetime import datetime
 import random
+import string
 
 from cachetools import TTLCache
 from fastapi import Cookie, Depends, FastAPI, Form, Request, Response
@@ -278,3 +279,38 @@ async def room4_answer(
             "color:cyan",
             'There is a note with the message: "M N"',
             'A second note has the message: "The color key in the Red Room matches the room number."')
+
+
+@app.get("/room0")
+async def room0(
+        request: Request,
+        lockbox_failed: bool = False,
+        registry: Registry = Depends(require_registry)):
+
+    return templates.TemplateResponse("room0.html",
+        {
+            "request": request,
+            "lockbox_failed": lockbox_failed,
+            "lockbox_success": False,
+        })
+
+
+@app.get("/room0/lockbox")
+async def room0_lockbox(
+        request: Request,
+        key: str,
+        registry: Registry = Depends(require_registry)):
+
+    if key == "PANDEMIC":
+        return RedirectResponse(url="/room0/pandemic")
+    else:
+        return RedirectResponse(url="/room0?lockbox_failed=true")
+
+
+@app.get("/room0/pandemic")
+async def room0_answer(
+        request: Request,
+        registry: Registry = Depends(require_registry)):
+
+    code = str(registry.team) + "|" + str(datetime.now())
+    return templates.TemplateResponse("vaccine.html", {"request": request, "success_code": code})
