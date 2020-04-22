@@ -112,13 +112,13 @@ async def room1_lockbox(
         key: str,
         registry: Registry = Depends(require_registry)):
 
-    if key == "13407":
-        return RedirectResponse(url="/room1/answer13407")
+    if key == "13047":
+        return RedirectResponse(url="/room1/answer13047")
     else:
         return RedirectResponse(url="/room1?lockbox_failed=true")
 
 
-@app.get("/room1/answer13407")
+@app.get("/room1/answer13047")
 async def room1_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
