@@ -32,7 +32,7 @@ errorlog = "-"
 # For debugging and testing
 log_data = {
     "loglevel": loglevel,
-    "workers": 2,
+    "workers": 1,
     "bind": bind,
     # Additional, non-gunicorn variables
     "host": host,
