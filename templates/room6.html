@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Room 6</title>
+        <style>
+        .row {
+            display: flex;
+        }
+        .column {
+            flex: 50%;
+        }
+        .btn-group {
+            float: left;
+            display: inline-block;
+        }
+        .button {
+            background-color: #FFFFFF;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            float: left;
+            width: 32px;
+            height: 32px;
+        }
+        </style>
+    </head>
+    <body>
+        <h1 style="color:#DDDD00">Yellow Room</h1>
+        <p>You are in a yellow room. There is a lockbox in the center of the room with a passphrase.</p>
+        <form action="/room6/lockbox">
+            <label for="lockbox">Lockbox Key:</label>
+            <input type="text" id="lockbox" name="key"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% if lockbox_failed %}
+        <p style="color:red">Unfortunately, that was incorrect.</p>
+        {% endif %}
+
+        <script>
+            var btnstate = {};
+            function ccolor(buttonId) {
+                var elem = document.getElementById(buttonId);
+                if (buttonId in btnstate) {
+                    if (btnstate[buttonId] == 1) {
+                        elem.style.backgroundColor = "#FFFFFF";
+                        btnstate[buttonId] = 0;
+                    } else {
+                        elem.style.backgroundColor = "#7FFF00";
+                        btnstate[buttonId] = 1;
+                    }
+                } else {
+                    elem.style.backgroundColor = "#7FFF00";
+                    btnstate[buttonId] = 1;
+                }
+            }
+        </script>
+
+        <br />
+        <div class="row">
+            <div class="column">
+                {% set btnid = namespace(x=0, y=0) %}
+                {% for row in rows %}
+                <div class="btn-group">
+                    {% set btnid.x = 0 %}
+                    {% for char in row %}
+                    <button class="button" id="btn{{ btnid.x }}x{{ btnid.y }}" onclick="ccolor('btn{{ btnid.x }}x{{ btnid.y }}')">{{ char }}</button>
+                    {% set btnid.x = btnid.x + 1 %}
+                    {% endfor %}
+                </div>
+                <br style="clear:both" />
+                {% set btnid.y = btnid.y + 1 %}
+                {% endfor %}
+            </div>
+            <div class="column">
+                <img src="static/greetings.png" />
+            </div>
+            <div class="column">
+            </div>
+        </div>
+        <br />
+
+        <a href="/room7">Return to White Room</a>
+    </body>
+</html>
