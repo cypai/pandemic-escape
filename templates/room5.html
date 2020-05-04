@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Room 5</title>
+        <style>
+        .row {
+            display: flex;
+        }
+        .column {
+            flex: 50%;
+        }
+        .imgrow {
+            display: flex;
+        }
+        .imgrow > div:not(:last-child) {
+            margin-right: 1%;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+        </style>
+    </head>
+    <body>
+        <h1 style="color:magenta">Magenta Room</h1>
+        <p>You are in a magenta room. There is a lockbox in the center of the room with a 7 digit passcode.</p>
+        <form action="/room5/lockbox">
+            <label for="lockbox">Lockbox Key:</label>
+            <input type="text" id="lockbox" name="key"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% if lockbox_failed %}
+        <p style="color:red">Unfortunately, that was incorrect.</p>
+        {% endif %}
+
+        <br/>
+        <p>Gallery of Successfully Infected Targets</p>
+        <br/>
+        <div class="imgrow">
+            <div style="flex:1.77">
+                <img src="static/room5_1.jpg" alt="Stanford" title="Stanford" style="img"/>
+            </div>
+            <div style="flex:0.82">
+                <img src="static/room5_2.jpg" alt="Cromwell" title="Cromwell" style="img"/>
+            </div>
+            <div style="flex:1.59">
+                <img src="static/room5_3.jpg" alt="Naaman" title="Naaman" style="img"/>
+            </div>
+            <div style="flex:0.8">
+                <img src="static/room5_4.jpg" alt="Chopin" title="Chopin" style="img"/>
+            </div>
+            <div style="flex:1.9">
+                <img src="static/room5_5.jpg" alt="March" title="March" style="img"/>
+            </div>
+            <div style="flex:0.766">
+                <img src="static/room5_6.jpg" alt="Mormont" title="Mormont" style="img"/>
+            </div>
+            <div style="flex:0.8">
+                <img src="static/room5_7.webp" alt="Lupin" title="Lupin" style="img"/>
+            </div>
+        </div>
+        <br/>
+
+        <div class="row">
+            <div class="column">
+                <p>1: Dental Snarl Fjord</p>
+                <p>2: Recover Owl Mill</p>
+                <p>3: Inane Man Ashtray</p>
+                <p>4: Cipher Confider</p>
+                <p>5: Harm Torn Mojo</p>
+                <p>6: Haze Lit Chamber</p>
+                <p>7: Urine Slump</p>
+            </div>
+            <div class="column">
+                <p>___ Scarlet Fever</p>
+                <p>___ Lycanthropy</p>
+                <p>___ Malaria</p>
+                <p>___ Typhoid</p>
+                <p>___ Greyscale</p>
+                <p>___ Tuberculosis</p>
+                <p>___ Leprosy</p>
+            </div>
+            <div class="column">
+            </div>
+        </div>
+
+        <a href="/room7">Return to White Room</a>
+    </body>
+</html>

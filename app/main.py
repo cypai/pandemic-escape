@@ -254,6 +254,12 @@ async def locked_room_verifier(
             return RedirectResponse(url="/room4")
         else:
             return RedirectResponse(url="/room4?unlock_failure=true")
+    elif locked_room == 5:
+        if key == "509":
+            team_progress[(registry.team, locked_room)] = True
+            return RedirectResponse(url="/room5")
+        else:
+            return RedirectResponse(url="/room5?unlock_failure=true")
 
 
 @app.get("/room4/lockbox")
@@ -279,6 +285,55 @@ async def room4_answer(
             "color:cyan",
             'There is a note with the message: "M N"',
             'A second note has the message: "The color key in the Red Room matches the room number."')
+
+
+@app.get("/room5")
+async def room5(
+        request: Request,
+        unlock_failure: bool = False,
+        lockbox_failed: bool = False,
+        start_btn_clicked: str = None,
+        coordinates: str = None,
+        registry: Registry = Depends(require_registry)):
+
+    if (registry.team, 5) in team_progress:
+        return templates.TemplateResponse("room5.html",
+                {
+                    "request": request,
+                    "lockbox_failed": lockbox_failed,
+                })
+    else:
+        return locked_room_template(request,
+                "Room 5",
+                "Magenta Room",
+                "color:magenta",
+                5,
+                unlock_failure)
+
+
+@app.get("/room5/lockbox")
+async def room5_lockbox(
+        request: Request,
+        key: str,
+        registry: Registry = Depends(require_registry)):
+
+    if key == "6721543":
+        return RedirectResponse(url="/room5/answer6721543")
+    else:
+        return RedirectResponse(url="/room5?lockbox_failed=true")
+
+
+@app.get("/room5/answer6721543")
+async def room5_answer(
+        request: Request,
+        registry: Registry = Depends(require_registry)):
+
+    return answer_template(request,
+            "Room 5",
+            "Magenta Room",
+            "color:magenta",
+            'There is a note with the message: "I C P"',
+            'A second note has the message: "Vaccine is in the Black Room."')
 
 
 @app.get("/room0")
