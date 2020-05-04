@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Room 3</title>
+        <style>
+            img {
+                border: 1px solid grey;
+                width: 850px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="color:blue">Blue Room</h1>
+        <p>You are in a blue room. There is a lockbox in the center of the room with a 5-digit passcode.</p>
+        <form action="/room3/lockbox">
+            <label for="lockbox">Lockbox Key:</label>
+            <input type="text" id="lockbox" name="key"/>
+            <input type="submit" value="Submit"/>
+        </form>
+        {% if lockbox_failed %}
+        <p style="color:red">Unfortunately, that was incorrect.</p>
+        {% endif %}
+
+        <p>_ _ _ _ _ _ _ _ _ _ _</p>
+
+        1:
+        <img src="static/music_1.png" alt="D C" title="D C"/>
+        <br />
+        2:
+        <img src="static/music_2.png" alt="L A" title="L A" style="img"/>
+        <br />
+        3:
+        <img src="static/music_3.png" alt="S I E" title="S I E" style="img"/>
+        <br />
+        4:
+        <img src="static/music_4.png" alt="A N" title="A N" style="img"/>
+        <br />
+        5:
+        <img src="static/music_5.png" alt="C T" title="C T" style="img"/>
+        <br />
+
+        <a href="/room7">Return to White Room</a>
+
+        <p style="color:white">16</p>
+    </body>
+</html>

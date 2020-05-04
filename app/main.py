@@ -166,6 +166,40 @@ async def room2_answer(
             'A second note has the message: "The White Room has doors with the same colors..."')
 
 
+@app.get("/room3")
+async def room3(
+        request: Request,
+        lockbox_failed: bool = False,
+        registry: Registry = Depends(require_registry)):
+
+    return templates.TemplateResponse("room3.html", {"request": request, "lockbox_failed": lockbox_failed})
+
+
+@app.get("/room3/lockbox")
+async def room3_lockbox(
+        request: Request,
+        key: str,
+        registry: Registry = Depends(require_registry)):
+
+    if key == "15673":
+        return RedirectResponse(url="/room3/answer15673")
+    else:
+        return RedirectResponse(url="/room3?lockbox_failed=true")
+
+
+@app.get("/room3/answer15673")
+async def room3_answer(
+        request: Request,
+        registry: Registry = Depends(require_registry)):
+
+    return answer_template(request,
+            "Room 3",
+            "Blue Room",
+            "color:blue",
+            'There is a note with the message: "B: 9"',
+            'A second note has the message: "Every Colored Room also has a Room Number."')
+
+
 @app.get("/room4")
 async def room4(
         request: Request,
