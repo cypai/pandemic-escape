@@ -94,6 +94,7 @@ def locked_room_template(request: Request, title, header, color, room, unlock_fa
                 "color": color,
                 "room": room,
                 "unlock_failure": unlock_failure,
+                "black": room == 0,
             })
 
 
@@ -419,15 +420,24 @@ async def room6_answer(
 @app.get("/room0")
 async def room0(
         request: Request,
+        unlock_failure: bool = False,
         lockbox_failed: bool = False,
         registry: Registry = Depends(require_registry)):
 
-    return templates.TemplateResponse("room0.html",
-        {
-            "request": request,
-            "lockbox_failed": lockbox_failed,
-            "lockbox_success": False,
-        })
+    if (registry.team, 0) in team_progress:
+        return templates.TemplateResponse("room0.html",
+            {
+                "request": request,
+                "lockbox_failed": lockbox_failed,
+                "lockbox_success": False,
+            })
+    else:
+        return locked_room_template(request,
+                "Room 0",
+                "Black Room",
+                "color:white",
+                0,
+                unlock_failure)
 
 
 @app.get("/room0/lockbox")

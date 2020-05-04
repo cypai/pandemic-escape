@@ -2,6 +2,13 @@
 <html lang="en">
     <head>
         <title>{{ room_title }}</title>
+        {% if black %}
+        <style>
+            body {background-color: black;}
+            p {color: white;}
+            label {color: white;}
+        </style>
+        {% endif %}
     </head>
     <body>
         <h1 style="{{ color }}">{{ room_header }}</h1>
@@ -15,7 +22,7 @@
         {% if unlock_failure %}
         <p style="color:red">Unfortunately, that was incorrect.</p>
         {% endif %}
-
+        <br />
         <a href="/room7">Return to White Room</a>
     </body>
 </html>
