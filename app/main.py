@@ -163,7 +163,7 @@ async def room2_answer(
             "Green Room",
             "color:green",
             'There is a note with the message: "G: 1"',
-            'A second note has the message: "The White Room has doors with the same colors..."')
+            'A second note has the message: "The White Room also has doors matching the color diagram, but the key is in a different format."')
 
 
 @app.get("/room3")
@@ -197,7 +197,7 @@ async def room3_answer(
             "Blue Room",
             "color:blue",
             'There is a note with the message: "B: 9"',
-            'A second note has the message: "Every Colored Room also has a Room Number."')
+            '')
 
 
 @app.get("/room4")
@@ -331,7 +331,7 @@ async def room4_answer(
             "Cyan Room",
             "color:cyan",
             'There is a note with the message: "M N"',
-            'A second note has the message: "The color key in the Red Room matches the room number."')
+            'A second note has the message: "The color key in the Red Room matches the room number. All colored rooms have room numbers."')
 
 
 @app.get("/room5")
