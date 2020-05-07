@@ -124,6 +124,7 @@ async def room1_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
 
+    print(f"Team {registry.team} has solved Room 1 at time {datetime.now()}")
     return answer_template(request,
             "Room 1",
             "Red Room",
@@ -158,6 +159,7 @@ async def room2_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
 
+    print(f"Team {registry.team} has solved Room 2 at time {datetime.now()}")
     return answer_template(request,
             "Room 2",
             "Green Room",
@@ -192,6 +194,7 @@ async def room3_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
 
+    print(f"Team {registry.team} has solved Room 3 at time {datetime.now()}")
     return answer_template(request,
             "Room 3",
             "Blue Room",
@@ -285,24 +288,28 @@ async def locked_room_verifier(
 
     if locked_room == 4:
         if key == "019":
+            print(f"Team {registry.team} has unlocked Room 4 at time {datetime.now()}")
             team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room4")
         else:
             return RedirectResponse(url="/room4?unlock_failure=true")
     elif locked_room == 5:
         if key == "509":
+            print(f"Team {registry.team} has unlocked Room 5 at time {datetime.now()}")
             team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room5")
         else:
             return RedirectResponse(url="/room5?unlock_failure=true")
     elif locked_room == 6:
         if key == "510":
+            print(f"Team {registry.team} has unlocked Room 6 at time {datetime.now()}")
             team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room6")
         else:
             return RedirectResponse(url="/room6?unlock_failure=true")
     elif locked_room == 0:
         if key == "000":
+            print(f"Team {registry.team} has unlocked Room 0 at time {datetime.now()}")
             team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room0")
         else:
@@ -326,6 +333,7 @@ async def room4_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
 
+    print(f"Team {registry.team} has solved Room 4 at time {datetime.now()}")
     return answer_template(request,
             "Room 4",
             "Cyan Room",
@@ -375,6 +383,7 @@ async def room5_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
 
+    print(f"Team {registry.team} has solved Room 5 at time {datetime.now()}")
     return answer_template(request,
             "Room 5",
             "Magenta Room",
@@ -443,6 +452,7 @@ async def room6_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
 
+    print(f"Team {registry.team} has solved Room 6 at time {datetime.now()}")
     return answer_template(request,
             "Room 6",
             "Yellow Room",
@@ -491,5 +501,6 @@ async def room0_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
 
+    print(f"Team {registry.team} has solved the Escape Room at time {datetime.now()}")
     code = str(registry.team) + "|" + str(datetime.now())
     return templates.TemplateResponse("vaccine.html", {"request": request, "success_code": code})
