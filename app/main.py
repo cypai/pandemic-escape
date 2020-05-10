@@ -11,10 +11,10 @@ from starlette.templating import Jinja2Templates
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-team_progress = TTLCache(100, 3600)
-room4_code = TTLCache(100, 3600)
-room4_amount = TTLCache(100, 3600)
-room4_last_clicked = TTLCache(100, 3600)
+team_progress = TTLCache(100, 36000)
+room4_code = TTLCache(100, 36000)
+room4_amount = TTLCache(100, 36000)
+room4_last_clicked = TTLCache(100, 36000)
 
 templates = Jinja2Templates(directory="templates")
 
