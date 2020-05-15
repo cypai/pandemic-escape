@@ -129,7 +129,7 @@ async def room1_answer(
             "Room 1",
             "Red Room",
             "color:red",
-            'There is a note with the message: "R: 5"',
+            'There is a note with the message: "R: 144"',
             'A second note has the message: "The keys to locked rooms are in RGB format."')
 
 
@@ -164,7 +164,7 @@ async def room2_answer(
             "Room 2",
             "Green Room",
             "color:green",
-            'There is a note with the message: "G: 1"',
+            'There is a note with the message: "G: 128"',
             'A second note has the message: "The keys to locked rooms are in RGB format."')
 
 
@@ -222,7 +222,7 @@ async def room3_answer(
             "Room 3",
             "Blue Room",
             "color:blue",
-            'There is a note with the message: "B: 9"',
+            'There is a note with the message: "B: 255"',
             'A second note has the message: "The keys to locked rooms are in RGB format."')
 
 
@@ -305,33 +305,42 @@ def clear_room4_state(registry: Registry):
 
 @app.get("/locked_room")
 async def locked_room_verifier(
-        key: str,
+        keyR: str,
+        keyG: str,
+        keyB: str,
         locked_room: int,
         registry: Registry = Depends(require_registry)):
 
+    def num(s):
+        try:
+            return int(s)
+        except ValueError:
+            return None
+
+    key = (num(keyR), num(keyG), num(keyB))
     if locked_room == 4:
-        if key == "019":
+        if key == (0, 128, 255):
             print(f"Team {registry.team} has unlocked Room 4 at time {datetime.now()}")
             team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room4")
         else:
             return RedirectResponse(url="/room4?unlock_failure=true")
     elif locked_room == 5:
-        if key == "509":
+        if key == (144, 0, 255):
             print(f"Team {registry.team} has unlocked Room 5 at time {datetime.now()}")
             team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room5")
         else:
             return RedirectResponse(url="/room5?unlock_failure=true")
     elif locked_room == 6:
-        if key == "510":
+        if key == (144, 128, 0):
             print(f"Team {registry.team} has unlocked Room 6 at time {datetime.now()}")
             team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room6")
         else:
             return RedirectResponse(url="/room6?unlock_failure=true")
     elif locked_room == 0:
-        if key == "000":
+        if key == (0, 0, 0):
             print(f"Team {registry.team} has unlocked Room 0 at time {datetime.now()}")
             team_progress[(registry.team, locked_room)] = True
             return RedirectResponse(url="/room0")

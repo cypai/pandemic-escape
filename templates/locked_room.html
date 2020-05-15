@@ -15,7 +15,9 @@
         <p>This room is locked. Please provide the key.</p>
         <form action="/locked_room">
             <label for="key">Key:</label>
-            <input type="text" id="key" name="key"/>
+            <input type="text" size="3" id="keyR" name="keyR"/>
+            <input type="text" size="3" id="keyG" name="keyG"/>
+            <input type="text" size="3" id="keyB" name="keyB"/>
             <input type="hidden" id="locked_room" name="locked_room" value="{{ room }}"/>
             <input type="submit" value="Submit"/>
         </form>
