@@ -371,7 +371,7 @@ async def room4_answer(
             "Cyan Room",
             "color:cyan",
             'There is a note with the message: "M N"',
-            'A second note has the message: "The color key in the Red Room matches the room number. All colored rooms have room numbers."')
+            'A second note has the message: "Vaccine is in the Black Room."')
 
 
 @app.get("/room5")
@@ -421,7 +421,7 @@ async def room5_answer(
             "Magenta Room",
             "color:magenta",
             'There is a note with the message: "I C P"',
-            'A second note has the message: "Vaccine is in the Black Room."')
+            'A second note has the message: "The color key in the Magenta Room matches the room number. All colored rooms have room numbers."')
 
 
 @app.get("/room6")
