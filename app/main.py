@@ -287,7 +287,7 @@ def next_room4_state(registry: Registry):
     else:
         room4_amount[registry.team] = 0
     if room4_amount[registry.team] >= 10:
-        code = "Passcode: 167324"
+        code = "Passcode: pannenkoek"
     else:
         code = random.choice(string.ascii_uppercase[:10]) + str(random.randint(1, 10))
     room4_code[registry.team] = code
@@ -354,13 +354,13 @@ async def room4_lockbox(
         key: str,
         registry: Registry = Depends(require_registry)):
 
-    if key == "167324":
-        return RedirectResponse(url="/room4/answer167324")
+    if key == "pannenkoek":
+        return RedirectResponse(url="/room4/pannenkoek")
     else:
         return RedirectResponse(url="/room4?lockbox_failed=true")
 
 
-@app.get("/room4/answer167324")
+@app.get("/room4/pannenkoek")
 async def room4_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
