@@ -1,31 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Room 5</title>
+        <title>Room 1</title>
         <style>
+        img {
+            width: 50%;
+        }
         .row {
             display: flex;
         }
+
         .column {
             flex: 50%;
-        }
-        .imgrow {
-            display: flex;
-        }
-        .imgrow > div:not(:last-child) {
-            margin-right: 0.5%;
-        }
-        img {
-            width: 100%;
-            height: auto;
-            vertical-align: middle;
         }
         </style>
     </head>
     <body>
-        <h1 style="color:magenta">Magenta Room</h1>
-        <p>You are in a magenta room. There is a lockbox in the center of the room with a 7 digit passcode.</p>
-        <form action="/room5/lockbox">
+        <h1 style="color:red">Red Room</h1>
+        <p>You are in a red room. There is a lockbox in the center of the room with the label "ACTGU"</p>
+        <form action="/room1/lockbox">
             <label for="lockbox">Lockbox Key:</label>
             <input type="text" id="lockbox" name="key"/>
             <input type="submit" value="Submit"/>
@@ -35,57 +28,39 @@
         {% endif %}
 
         <br/>
-        <a style="color:black" href="https://www.reverseimagesearch.com/">Gallery of Successfully Infected Targets</a>
-        <br/>
-        <br/>
-        <div class="imgrow">
-            <div style="flex:0.8">
-                <img src="static/room5_4.jpg" alt="Romantic Composer" title="Romantic Composer" style="img"/>
-            </div>
-            <div style="flex:0.8">
-                <img src="static/room5_7.jpg" alt="Some Wizard" title="Some Wizard" style="img"/>
-            </div>
-            <div style="flex:0.82">
-                <img src="static/room5_2.jpg" alt="Rebel Scum" title="Rebel Scum" style="img"/>
-            </div>
-            <div style="flex:0.766">
-                <img src="static/room5_6.jpg" alt="Stone-Faced Man" title="Stone-Faced Man" style="img"/>
-            </div>
-            <div style="flex:1.77">
-                <img src="static/room5_1.jpg" alt="Stanford University" title="Stanford University" style="img"/>
-            </div>
-            <div style="flex:1.9">
-                <img src="static/room5_5.jpg" alt="Little Lady" title="Little Lady" style="img"/>
-            </div>
-            <div style="flex:1.59">
-                <img src="static/room5_3.jpg" alt="2 Kings 5" title="2 Kings 5" style="img"/>
-            </div>
-        </div>
-        <br/>
 
         <div class="row">
             <div class="column">
-                <p>1: Dental Snarl Fjord</p>
-                <p>2: Recover Owl Mill</p>
-                <p>3: Inane Man Ashtray</p>
-                <p>4: Cipher Confider</p>
-                <p>5: Harm Torn Mojo</p>
-                <p>6: Haze Lit Chamber</p>
-                <p>7: Urine Slump</p>
+                <p>There are two ways to represent color: Additive and Subtractive.</p>
+                <p>With Additive Color, we start with the absence of color (Black), then add colors until we get the full spectrum of White. We can generate any color using the primary colors Red, Green, and Blue.</p>
+                <p>The following diagram illustrates Additive Color:</p>
+                <img src="static/additive_color.png" alt="Cyan G" title="Cyan G" style="img"/>
             </div>
             <div class="column">
-                <p>___ Scarlet Fever</p>
-                <p>___ Lycanthropy</p>
-                <p>___ Malaria</p>
-                <p>___ Typhoid</p>
-                <p>___ Greyscale</p>
-                <p>___ Tuberculosis</p>
-                <p>___ Leprosy</p>
+                <p>Black = 0</p>
+                <p>Red = 1</p>
+                <p>Green = 2</p>
+                <p>Blue = 3</p>
+                <p>Cyan = 4</p>
+                <p>Magenta = 5</p>
+                <p>Yellow = 6</p>
+                <p>White = 7</p>
             </div>
             <div class="column">
+                <p>There is a note illustrating a DNA and an RNA strand:</p>
+                <p>DNA:</p>
+                <p>ACTGTA</p>
+                <p>TTGAGG</p>
+                <p>RNA:</p>
+                <p>ACGUGU</p>
+            </div>
+            <div class="column">
+                <img src="static/dnarna.png" alt="Blue C" title="Blue C" style="img"/>
             </div>
         </div>
 
         <a href="/room7">Return to White Room</a>
+
+        <p style="color:white">32</p>
     </body>
 </html>
