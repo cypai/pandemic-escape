@@ -507,7 +507,7 @@ async def room0_lockbox(
         key: str,
         registry: Registry = Depends(require_registry)):
 
-    if key == "PANDEMIC":
+    if key.lower() == "pandemic":
         return RedirectResponse(url="/room0/pandemic")
     else:
         return RedirectResponse(url="/room0?lockbox_failed=true")
