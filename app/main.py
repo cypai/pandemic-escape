@@ -424,6 +424,14 @@ async def room5_answer(
             'A second note has the message: "The color key in the Magenta Room matches the room number. All colored rooms have room numbers."')
 
 
+@app.get("/room5/bluec")
+async def bluec(
+        request: Request,
+        registry: Registry = Depends(require_registry)):
+
+    return templates.TemplateResponse("bluec.html", {"request": request})
+
+
 @app.get("/room6")
 async def room6(
         request: Request,
