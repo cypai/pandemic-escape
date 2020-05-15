@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Room 6</title>
+        <title>Room 3</title>
         <style>
         .row {
             display: flex;
         }
         .column {
             flex: 50%;
+        }
+        .imgrow {
+            display: flex;
+            width: 25%;
+        }
+        .imgrow > div:not(:last-child) {
+            margin-right: 0.5%;
         }
         .btn-group {
             float: left;
@@ -26,9 +33,9 @@
         </style>
     </head>
     <body>
-        <h1 style="color:#DDDD00">Yellow Room</h1>
-        <p>You are in a yellow room. There is a lockbox in the center of the room with a passphrase.</p>
-        <form action="/room6/lockbox">
+        <h1 style="color:blue">Blue Room</h1>
+        <p>You are in a blue room. There is a lockbox in the center of the room with a passphrase.</p>
+        <form action="/room3/lockbox">
             <label for="lockbox">Lockbox Key:</label>
             <input type="text" id="lockbox" name="key"/>
             <input type="submit" value="Submit"/>
@@ -76,6 +83,11 @@
                 <img src="static/greetings.png" />
             </div>
             <div class="column">
+                <div class="imgrow">
+                    <div style="flex:0.766">
+                        <img src="static/room1_6.jpg" alt="Stone-Faced Man" title="Stone-Faced Man" style="img"/>
+                    </div>
+                </div>
             </div>
         </div>
         <br />

@@ -113,13 +113,13 @@ async def room1_lockbox(
         key: str,
         registry: Registry = Depends(require_registry)):
 
-    if key == "13047":
-        return RedirectResponse(url="/room1/answer13047")
+    if key == "6721543":
+        return RedirectResponse(url="/room1/answer6721543")
     else:
         return RedirectResponse(url="/room1?lockbox_failed=true")
 
 
-@app.get("/room1/answer13047")
+@app.get("/room1/answer6721543")
 async def room1_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
@@ -165,7 +165,7 @@ async def room2_answer(
             "Green Room",
             "color:green",
             'There is a note with the message: "G: 1"',
-            'A second note has the message: "The White Room also has doors matching the color diagram, but the key is in a different format."')
+            'A second note has the message: "The keys to locked rooms are in RGB format."')
 
 
 @app.get("/room3")
@@ -174,7 +174,30 @@ async def room3(
         lockbox_failed: bool = False,
         registry: Registry = Depends(require_registry)):
 
-    return templates.TemplateResponse("room3.html", {"request": request, "lockbox_failed": lockbox_failed})
+        rows = [
+                "NVDTHEBEAANS",
+                "OIEINGITUURE",
+                "CCTDASFULTAD",
+                "WERNECOWENEV",
+                "IINCSHNLGLVN",
+                "ESULLLKEDAAO",
+                "OIVETHCOMSTI",
+                "ERYVENNUMENT",
+                "VDIORGITYMEN",
+                "OCSSEIEREYOJ"
+                ]
+        key1 = ["LEV", "ITI", "CUS"]
+        key2 = ["ANS", "IEP", "SEH"]
+        key3 = ["LAS", "GIA", "GIA"]
+        return templates.TemplateResponse("room3.html",
+                {
+                    "request": request,
+                    "lockbox_failed": lockbox_failed,
+                    "rows": rows,
+                    "key1": key1,
+                    "key2": key2,
+                    "key3": key3,
+                })
 
 
 @app.get("/room3/lockbox")
@@ -183,13 +206,13 @@ async def room3_lockbox(
         key: str,
         registry: Registry = Depends(require_registry)):
 
-    if key == "15673":
-        return RedirectResponse(url="/room3/answer15673")
+    if key.replace(" ","").lower() == "hellothere":
+        return RedirectResponse(url="/room3/generalkenobi")
     else:
         return RedirectResponse(url="/room3?lockbox_failed=true")
 
 
-@app.get("/room3/answer15673")
+@app.get("/room3/generalkenobi")
 async def room3_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
@@ -200,7 +223,7 @@ async def room3_answer(
             "Blue Room",
             "color:blue",
             'There is a note with the message: "B: 9"',
-            '')
+            'A second note has the message: "The keys to locked rooms are in RGB format."')
 
 
 @app.get("/room4")
@@ -378,7 +401,7 @@ async def room5_lockbox(
         return RedirectResponse(url="/room5?lockbox_failed=true")
 
 
-@app.get("/room5/answer6721543")
+@app.get("/room5/answer13047")
 async def room5_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
@@ -402,30 +425,7 @@ async def room6(
         registry: Registry = Depends(require_registry)):
 
     if (registry.team, 6) in team_progress:
-        rows = [
-                "NVDTHEBEAANS",
-                "OIEINGITUURE",
-                "CCTDASFULTAD",
-                "WERNECOWENEV",
-                "IINCSHNLGLVN",
-                "ESULLLKEDAAO",
-                "OIVETHCOMSTI",
-                "ERYVENNUMENT",
-                "VDIORGITYMEN",
-                "OCSSEIEREYOJ"
-                ]
-        key1 = ["LEV", "ITI", "CUS"]
-        key2 = ["ANS", "IEP", "SEH"]
-        key3 = ["LAS", "GIA", "GIA"]
-        return templates.TemplateResponse("room6.html",
-                {
-                    "request": request,
-                    "lockbox_failed": lockbox_failed,
-                    "rows": rows,
-                    "key1": key1,
-                    "key2": key2,
-                    "key3": key3,
-                })
+        return templates.TemplateResponse("room6.html", {"request": request, "lockbox_failed": lockbox_failed})
     else:
         return locked_room_template(request,
                 "Room 6",

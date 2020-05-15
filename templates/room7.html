@@ -2,10 +2,40 @@
 <html lang="en">
     <head>
         <title>Room 7</title>
+        <style>
+        .row {
+            display: flex;
+        }
+        .column {
+            flex: 50%;
+        }
+        .imgrow {
+            display: flex;
+            width: 25%;
+        }
+        .imgrow > div:not(:last-child) {
+            margin-right: 0.5%;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+        </style>
     </head>
     <body>
         <h1>White Room</h1>
-        <p>You are in a white room. You see a number of doors of various colors.</p>
+        <p>You are in a white room. You see a number of doors of various colors. There's also a photo gallery.</p>
+        <p>Gallery of Previously Infected Targets</p>
+        <div class="imgrow">
+            <div style="flex:0.8">
+                <img src="static/room1_7.jpg" alt="Some Wizard" title="Some Wizard" style="img"/>
+            </div>
+            <div style="flex:1.9">
+                <img src="static/room1_5.jpg" alt="Little Lady" title="Little Lady" style="img"/>
+            </div>
+        </div>
+        <br/>
         <a href="/room1">Red Door</a>
         <br/>
         <a href="/room2">Green Door</a>
