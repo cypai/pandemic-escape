@@ -175,28 +175,22 @@ async def room3(
         registry: Registry = Depends(require_registry)):
 
         rows = [
-                "NVDTHEBEAANS",
-                "OIEINGITUURE",
-                "CCTDASFULTAD",
-                "WERNECOWENEV",
-                "IINCSHNLGLVN",
-                "ESULLLKEDAAO",
-                "OIVETHCOMSTI",
-                "ERYVENNUMENT",
-                "VDIORGITYMEN",
-                "OCSSEIEREYOJ"
+                "MPCTHEPROANS",
+                "YHIATEZOTANT",
+                "LATNVAOANTRE",
+                "WERICCIDSSIS",
+                "IPARSHPEIAPM",
+                "EISALLERMIHG",
+                "OTICTHBACDRA",
+                "NICTEERETIAN",
+                "EANNSNIUMCPH",
+                "GITITIEREISY"
                 ]
-        key1 = ["LEV", "ITI", "CUS"]
-        key2 = ["ANS", "IEP", "SEH"]
-        key3 = ["LAS", "GIA", "GIA"]
         return templates.TemplateResponse("room3.html",
                 {
                     "request": request,
                     "lockbox_failed": lockbox_failed,
                     "rows": rows,
-                    "key1": key1,
-                    "key2": key2,
-                    "key3": key3,
                 })
 
 
@@ -458,13 +452,13 @@ async def room6_lockbox(
         key: str,
         registry: Registry = Depends(require_registry)):
 
-    if key == "15653":
-        return RedirectResponse(url="/room6/15653")
+    if key == "12390":
+        return RedirectResponse(url="/room6/12390")
     else:
         return RedirectResponse(url="/room6?lockbox_failed=true")
 
 
-@app.get("/room6/15653")
+@app.get("/room6/12390")
 async def room6_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
