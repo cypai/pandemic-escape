@@ -2,22 +2,10 @@
 <html lang="en">
     <head>
         <title>Room 5</title>
-        <style>
-        img {
-            width: 50%;
-        }
-        .row {
-            display: flex;
-        }
-
-        .column {
-            flex: 50%;
-        }
-        </style>
     </head>
     <body>
         <h1 style="color:magenta">Magenta Room</h1>
-        <p>You are in a magenta room. There is a lockbox in the center of the room with the label "ACTGU"</p>
+        <p>You are in a magenta room. There is a lockbox in the center of the room with a 5-digit passcode.</p>
         <form action="/room5/lockbox">
             <label for="lockbox">Lockbox Key:</label>
             <input type="text" id="lockbox" name="key"/>
@@ -27,36 +15,11 @@
         <p style="color:red">Unfortunately, that was incorrect.</p>
         {% endif %}
 
-        <br/>
+        <p>BIG = 396</p>
 
-        <div class="row">
-            <div class="column">
-                <p>A reminder about Additive Color:</p>
-                <a href="/room5/bluec">
-                    <img src="static/additive_color.png" alt="Cyan G" title="Cyan G" style="img"/>
-                </a>
-            </div>
-            <div class="column">
-                <p>Black = 0</p>
-                <p>Red = 1</p>
-                <p>Green = 2</p>
-                <p>Blue = 3</p>
-                <p>Cyan = 4</p>
-                <p>Magenta = 5</p>
-                <p>Yellow = 6</p>
-                <p>White = 7</p>
-            </div>
-            <div class="column">
-                <p>There is a note illustrating a DNA and an RNA strand:</p>
-                <p>DNA:</p>
-                <p>ACTGTA</p>
-                <p>TTGAGG</p>
-                <p>RNA:</p>
-                <p>ACGUGU</p>
-            </div>
-            <div class="column">
-            </div>
-        </div>
+        <img src="static/wordaddition.png" style="img"/>
+
+        <br />
 
         <a href="/room7">Return to White Room</a>
     </body>

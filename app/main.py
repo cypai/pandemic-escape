@@ -378,11 +378,7 @@ async def room5(
         registry: Registry = Depends(require_registry)):
 
     if (registry.team, 5) in team_progress:
-        return templates.TemplateResponse("room5.html",
-                {
-                    "request": request,
-                    "lockbox_failed": lockbox_failed,
-                })
+        return templates.TemplateResponse("room5.html", {"request": request, "lockbox_failed": lockbox_failed})
     else:
         return locked_room_template(request,
                 "Room 5",
@@ -398,13 +394,13 @@ async def room5_lockbox(
         key: str,
         registry: Registry = Depends(require_registry)):
 
-    if key == "13047":
-        return RedirectResponse(url="/room5/answer13047")
+    if key == "12390":
+        return RedirectResponse(url="/room5/12390")
     else:
         return RedirectResponse(url="/room5?lockbox_failed=true")
 
 
-@app.get("/room5/answer13047")
+@app.get("/room5/12390")
 async def room5_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
@@ -414,16 +410,8 @@ async def room5_answer(
             "Room 5",
             "Magenta Room",
             "color:magenta",
-            'There is a note with the message: "I C P"',
-            'A second note has the message: "The color key in the Magenta Room matches the room number. All colored rooms have room numbers."')
-
-
-@app.get("/room5/bluec")
-async def bluec(
-        request: Request,
-        registry: Registry = Depends(require_registry)):
-
-    return templates.TemplateResponse("bluec.html", {"request": request})
+            'There is a note with the message: "A E D"',
+            'A second note has the message: "Teleportation via manually adjusting the URL may be required to access the Vaccine."')
 
 
 @app.get("/room6")
@@ -436,7 +424,11 @@ async def room6(
         registry: Registry = Depends(require_registry)):
 
     if (registry.team, 6) in team_progress:
-        return templates.TemplateResponse("room6.html", {"request": request, "lockbox_failed": lockbox_failed})
+        return templates.TemplateResponse("room6.html",
+                {
+                    "request": request,
+                    "lockbox_failed": lockbox_failed,
+                })
     else:
         return locked_room_template(request,
                 "Room 6",
@@ -452,13 +444,13 @@ async def room6_lockbox(
         key: str,
         registry: Registry = Depends(require_registry)):
 
-    if key == "12390":
-        return RedirectResponse(url="/room6/12390")
+    if key == "13047":
+        return RedirectResponse(url="/room6/answer13047")
     else:
         return RedirectResponse(url="/room6?lockbox_failed=true")
 
 
-@app.get("/room6/12390")
+@app.get("/room6/answer13047")
 async def room6_answer(
         request: Request,
         registry: Registry = Depends(require_registry)):
@@ -468,8 +460,16 @@ async def room6_answer(
             "Room 6",
             "Yellow Room",
             "color:#DDDD00",
-            'There is a note with the message: "A E D"',
-            'A second note has the message: "Teleportation via manually adjusting the URL may be required to access the Vaccine."')
+            'There is a note with the message: "I C P"',
+            'A second note has the message: "The color key in the Yellow Room matches the room number. All colored rooms have room numbers."')
+
+
+@app.get("/room6/bluec")
+async def bluec(
+        request: Request,
+        registry: Registry = Depends(require_registry)):
+
+    return templates.TemplateResponse("bluec.html", {"request": request})
 
 
 @app.get("/room0")
