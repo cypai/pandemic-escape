@@ -1,4 +1,4 @@
-fastapi==0.54.1
+fastapi==0.65.2
 uvicorn==0.11.7
 cachetools==4.1.0
 jinja2
